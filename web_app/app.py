@@ -55,11 +55,11 @@ def create_app():
                 response = jsonify(
                             {'question_title': question_package[1],
                              'question_lesson': question_package[2],
-                             'question': question_package[3],
-                             'a': question_package[4],
-                             'b': question_package[5],
-                             'c': question_package[6],
-                             'd': question_package[7],
+                             'question_desc': question_package[3],
+                             'question_a': question_package[4],
+                             'question_b': question_package[5],
+                             'question_c': question_package[6],
+                             'question_d': question_package[7],
                              'answer': question_package[8],
                              'error': question_package[9]})
 
