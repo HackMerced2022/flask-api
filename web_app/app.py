@@ -1,5 +1,17 @@
+import sys
+import psycopg2
+from os import getenv
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, make_response, jsonify, request
 from flask_cors import CORS
+
+ELEPHANTSQL_DATABASE = getenv('ELEPHANTSQL_DATABASE')
+ELEPHANTSQL_USERNAME = getenv('ELEPHANTSQL_USERNAME')
+ELEPHANTSQL_PASSWORD = getenv('ELEPHANTSQL_PASSWORD')
+ELEPHANTSQL_HOST = getenv('ELEPHANTSQL_HOST')
+
 
 def create_app():
     '''Main app'''
