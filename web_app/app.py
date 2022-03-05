@@ -54,13 +54,13 @@ def create_app():
                 # Response output
                 response = jsonify(
                             {'question_title': question_package[1],
-                            'question': question_package[2],
-                            'a': question_package[3],
-                            'b': question_package[4],
-                            'c': question_package[5],
-                            'd': question_package[6],
-                            'answer': question_package[7],
-                            'error': question_package[8]})
+                             'question': question_package[2],
+                             'a': question_package[3],
+                             'b': question_package[4],
+                             'c': question_package[5],
+                             'd': question_package[6],
+                             'answer': question_package[7],
+                             'error': question_package[8]})
 
             else:
                 # Key missing or value type invalid
