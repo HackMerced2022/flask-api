@@ -1,1 +1,1 @@
-web: gunicorn strain_api:API -t 1200
+web: gunicorn web_app:APP -t 1200
