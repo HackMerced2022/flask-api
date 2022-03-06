@@ -23,14 +23,15 @@ ELEPHANTSQL_USERNAME = getenv('ELEPHANTSQL_USERNAME')
 ELEPHANTSQL_PASSWORD = getenv('ELEPHANTSQL_PASSWORD')
 ELEPHANTSQL_HOST = getenv('ELEPHANTSQL_HOST')
 
+
 def create_app():
     '''Main app'''
-
     app = Flask(__name__)
     cors = CORS(app)    # Set up Flask to bypass CORS at the front end:
 
     @app.route('/', methods=['POST'])
     def index():
+        '''Main Route returns question information'''
 
         # Json content type needed
         content_type = request.headers.get('Content-Type')
@@ -75,8 +76,10 @@ def create_app():
    
         return response
 
+
     @app.route('/leaderboard', methods=['POST'])
     def leaderboard():
+        '''Uploads user rankings to sql database'''
 
         # Json content type needed
         content_type = request.headers.get('Content-Type')
@@ -162,14 +165,14 @@ def create_app():
    
         return response
 
+
     @app.route('/get_usernames', methods=['POST'])
     def get_usernames():
+        '''Returns usernames table'''
 
         # Json content type needed
         content_type = request.headers.get('Content-Type')
         if (content_type == 'application/json'):
-            json = request.json
-
 
             # Database connection
             elephantsql_client = connect(ELEPHANTSQL_DATABASE, ELEPHANTSQL_USERNAME, ELEPHANTSQL_PASSWORD, ELEPHANTSQL_HOST)
