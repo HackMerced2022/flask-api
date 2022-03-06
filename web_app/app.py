@@ -89,7 +89,7 @@ def create_app():
                 username = json['username']
                 questions_right = int(json['questions_right'])
                 questions_wrong = int(json['questions_wrong'])
-                question_accuracy = int(json['question_accuracy'])
+                question_accuracy = float(json['question_accuracy'])
                 total_time = int(json['total_time'])
     
                 # Testing username/ grabbing elements
@@ -126,7 +126,7 @@ def create_app():
                     print(username_package)
                     questions_right += int(username_package[0][1])
                     questions_wrong += int(username_package[0][2])
-                    question_accuracy = (questions_right / (questions_right + questions_wrong)) * 100
+                    question_accuracy = float((questions_right / (questions_right + questions_wrong)) * 100)
                     total_time += int(username_package[0][4])
 
                     # Convert to string
@@ -155,6 +155,34 @@ def create_app():
             else:
                 # Key missing or value type invalid
                 response = jsonify({'error':'username key is missing from json file or username value is not equal to string.'})
+
+        else:
+            # Incorrect content type
+            response = jsonify({'error': 'Content-Type not supported!'}) 
+   
+        return response
+
+    @app.route('/get_usernames', methods=['POST'])
+    def get_usernames():
+
+        # Json content type needed
+        content_type = request.headers.get('Content-Type')
+        if (content_type == 'application/json'):
+            json = request.json
+
+
+            # Database connection
+            elephantsql_client = connect(ELEPHANTSQL_DATABASE, ELEPHANTSQL_USERNAME, ELEPHANTSQL_PASSWORD, ELEPHANTSQL_HOST)
+
+            command = '''SELECT * FROM usernames_table ORDER BY question_accuracy DESC'''
+            usernames_package = get_value(elephantsql_client, command)
+
+            # Close the connection
+            elephantsql_client.close()
+            print('Connection is closed.')
+
+            response = jsonify({'error': 'success', 'usernames_package': usernames_package})
+
 
         else:
             # Incorrect content type
