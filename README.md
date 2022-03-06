@@ -74,3 +74,19 @@ Example output to be received. Populates database with json package
 }
 
 ```
+Example input package POST request to ``https://hackermerced-api.herokuapp.com/get_usernames``` Content-Type must be equal to ```“application/json”``` in the header.
+```
+{ 
+‘dummy’: ‘test’
+}
+
+```
+
+Example output to be received. Populates database with json package
+```
+{
+'error': ‘success’,
+‘usernames_package’: [(‘Superman’, ‘2’, ‘3’, ‘40.0’, ‘25’)]
+}
+
+```
